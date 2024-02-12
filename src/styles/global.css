@@ -6,9 +6,3 @@
 html {
     background-color: #2d3748; /* Replace with your desired background color */
 }
-
-@layer components {
-    .language-option {
-        
-    }
-}
