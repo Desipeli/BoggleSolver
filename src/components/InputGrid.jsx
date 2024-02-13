@@ -7,12 +7,19 @@ const InputGrid = ({ rowCount, colCount }) => {
   React.useEffect(() => {
     const gridContainer = gridContainerRef.current
 
-    gridContainer.style.gridTemplateColumns = `repeat(${colCount}, minmax(0, 1fr))`
-    gridContainer.style.width = `${colCount * 5}rem`
+    const mediaQuery = window.matchMedia('(max-width: 400px)')
+
+    if (mediaQuery.matches) {
+      gridContainer.style.gridTemplateColumns = `repeat(${colCount}, minmax(0, 1fr))`
+      gridContainer.style.width = `${colCount * 3}rem`
+    } else {
+      gridContainer.style.gridTemplateColumns = `repeat(${colCount}, minmax(0, 1fr))`
+      gridContainer.style.width = `${colCount * 4}rem`
+    }
   }, [colCount])
 
   const handleInputKey = (index) => (event) => {
-    if (['Backspace', 'Delete'].includes(event.key) && index > 0) {
+    if (['Backspace'].includes(event.key) && index > 0) {
       if (inputRefs.current[index].value.length === 0) {
         const prevInput = inputRefs.current[index - 1]
         prevInput.focus()
@@ -37,14 +44,14 @@ const InputGrid = ({ rowCount, colCount }) => {
       ref={gridContainerRef}
       id="grid-container"
       name="grid-container"
-      className={`grid gap-5 lg:w-1/2 min-w-84 max-w-lg mx-auto justify-items-center`}
+      className={`grid gap-5 lg:w-1/2 max-w-56 xs:max-w-lg w-full mx-auto justify-items-center`}
     >
       {Array.from({ length: rowCount * colCount }, (_, index) => (
         <input
           key={index}
           ref={(r) => (inputRefs.current[index] = r)}
           type="text"
-          className="w-14 h-14 rounded-md text-center uppercase"
+          className="xs:w-14 xs:h-14 w-10 h-10 font-bold rounded-md text-center uppercase grid-input-field"
           onChange={handleInputChange(index)}
           onKeyDown={handleInputKey(index)}
         ></input>

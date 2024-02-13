@@ -10,12 +10,12 @@ const IndexPage = ({ data }) => {
   const wordListURL =
     process.env.GATSBY_BASE_URL +
     data.allFile.nodes.map((node) => node.publicURL)
-  console.log(wordListURL)
+
   const [rowCount, setRowCount] = React.useState(5)
   const [colCount, setColCount] = React.useState(5)
 
   return (
-    <main className="max-w-6xl mx-auto">
+    <main className="max-w-4xl mx-auto">
       <section className="m-2 sm:m-12">
         <h1 className="text-center text-5xl my-12 text-slate-100 text-decoration: underline">
           Boggle Ratkaisin
