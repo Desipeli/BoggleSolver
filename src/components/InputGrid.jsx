@@ -4,8 +4,6 @@ const InputGrid = ({ rowCount, colCount }) => {
   const gridContainerRef = React.useRef(null)
   const inputRefs = React.useRef([])
 
-  const letters = 'abcdefghijklmnopwrstuvwxyzåäö'
-
   React.useEffect(() => {
     const gridContainer = gridContainerRef.current
 
