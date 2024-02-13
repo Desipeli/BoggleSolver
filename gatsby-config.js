@@ -1,13 +1,17 @@
+require('dotenv').config({
+  path: `.env.${process.env.NODE_ENV}`,
+})
+
 /**
  * @type {import('gatsby').GatsbyConfig}
  */
 module.exports = {
-  pathPrefix: "/BoggleSolver",
+  pathPrefix: '/BoggleSolver',
   siteMetadata: {
     siteUrl: `https://www.yourdomain.tld`,
   },
   plugins: [
-    "gatsby-plugin-postcss",
+    'gatsby-plugin-postcss',
     `gatsby-plugin-image`,
     `gatsby-plugin-sharp`,
     `gatsby-transformer-sharp`,
@@ -33,4 +37,4 @@ module.exports = {
       },
     },
   ],
-};
+}

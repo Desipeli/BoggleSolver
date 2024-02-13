@@ -3,8 +3,14 @@ import '../styles/global.css'
 
 import InputGrid from '../components/InputGrid'
 import Settings from '../components/Settings'
+import { graphql } from 'gatsby'
 
-const IndexPage = () => {
+const IndexPage = ({ data }) => {
+  console.log(process.env.GATSBY_BASE_URL)
+  const wordListURL =
+    process.env.GATSBY_BASE_URL +
+    data.allFile.nodes.map((node) => node.publicURL)
+  console.log(wordListURL)
   const [rowCount, setRowCount] = React.useState(5)
   const [colCount, setColCount] = React.useState(5)
 
@@ -31,6 +37,17 @@ const IndexPage = () => {
     </main>
   )
 }
+
+export const query = graphql`
+  query MyQuery {
+    allFile(filter: { name: { eq: "sanalista" }, extension: { eq: "json" } }) {
+      nodes {
+        base
+        publicURL
+      }
+    }
+  }
+`
 
 export default IndexPage
 
