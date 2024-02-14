@@ -24,35 +24,37 @@ const IndexPage = ({ data }) => {
 
   return (
     <main className="max-w-4xl mx-auto">
-      <section className="m-2 sm:m-12">
-        <h1 className="text-center text-5xl my-12 text-slate-100 text-decoration: underline">
-          Boggle Ratkaisin
-        </h1>
-        <Settings
-          colCount={colCount}
-          rowCount={rowCount}
-          setColCount={setColCount}
-          setRowCount={setRowCount}
-        />
-        <section className="block lg:flex justify-between my-12">
-          <div className="lg:w-1/2 w-full text-xl px-4 lg:my-0 my-12 text-slate-100">
-            <p>Valitse kieli ja pelilaudan koko.</p>
-            <p>Kirjaa pelilaudan nopissa näkyvät kirjaimet taulukkoon.</p>
-          </div>
-          <InputGrid
-            rowCount={rowCount}
+      <div className="m-2 sm:m-12">
+        <section>
+          <h1 className="text-center text-5xl my-12 text-slate-100 text-decoration: underline">
+            Boggle Ratkaisin
+          </h1>
+          <Settings
             colCount={colCount}
-            gridValues={gridValues}
-            setGridValues={setGridValues}
+            rowCount={rowCount}
+            setColCount={setColCount}
+            setRowCount={setRowCount}
           />
+          <section className="block lg:flex justify-between my-12">
+            <div className="lg:w-1/2 w-full text-xl px-4 lg:my-0 my-12 text-slate-100">
+              <p>Valitse kieli ja pelilaudan koko.</p>
+              <p>Kirjaa pelilaudan nopissa näkyvät kirjaimet taulukkoon.</p>
+            </div>
+            <InputGrid
+              rowCount={rowCount}
+              colCount={colCount}
+              gridValues={gridValues}
+              setGridValues={setGridValues}
+            />
+          </section>
         </section>
-      </section>
-      <WordList
-        dictionary={dictionary}
-        gridValues={gridValues}
-        rowCount={rowCount}
-        colCount={colCount}
-      />
+        <WordList
+          dictionary={dictionary}
+          gridValues={gridValues}
+          rowCount={rowCount}
+          colCount={colCount}
+        />
+      </div>
     </main>
   )
 }

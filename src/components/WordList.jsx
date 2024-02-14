@@ -4,14 +4,17 @@ const { convertArrayTo2D } = require('../services/ArrayGraph')
 
 const WordList = ({ dictionary, gridValues, rowCount, colCount }) => {
   const [foundWords, setFoundWords] = React.useState([])
+  const [findError, setFindError] = React.useState('')
 
   const handleSearch = () => {
     for (let i = 0; i < gridValues.length; i++) {
       if (gridValues[i].length === 0) {
-        alert('Täytä taulukko')
+        setFindError('Täytä taulukko')
         return
       }
     }
+
+    setFindError('')
 
     const array2D = convertArrayTo2D(gridValues, rowCount, colCount)
     const result = searchWords(array2D, dictionary) // result = [word, coordinate, coordinate,...]
@@ -30,17 +33,24 @@ const WordList = ({ dictionary, gridValues, rowCount, colCount }) => {
   return (
     <>
       <section className="flex justify-center mx-2">
-        <button
-          name="search-words-btn"
-          className="border rounded-lg min-h-12 w-80 bg-slate-100"
-          onClick={handleSearch}
-        >
-          Etsi sanat
-        </button>
+        <div>
+          <p className="text-center my-2 text-red-500 text-xl" id="find-error">
+            {findError}
+          </p>
+          <button
+            name="search-words-btn"
+            className="border rounded-lg min-h-12 w-80 bg-slate-100"
+            onClick={handleSearch}
+          >
+            Etsi sanat
+          </button>
+        </div>
       </section>
-      {foundWords.map((v, i) => (
-        <p key={i}>{v}</p>
-      ))}
+      <section className="grid gap-2 grid-cols-1 xs:grid-cols-2 justify-items-center text-2xl text-slate-100 my-4">
+        {foundWords.map((v, i) => (
+          <p key={i}>{v[0]}</p>
+        ))}
+      </section>
     </>
   )
 }
