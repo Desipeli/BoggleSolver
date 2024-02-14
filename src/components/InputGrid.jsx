@@ -64,8 +64,6 @@ const InputGrid = ({
     for (let i = 0; i < highlightedRoute.length; i++) {}
   }, [highlightedRoute])
 
-  console.log('inputsduh', highlightedRoute)
-
   return (
     <div
       ref={gridContainerRef}
