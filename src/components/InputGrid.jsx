@@ -74,15 +74,38 @@ const InputGrid = ({
       className={`grid gap-5 lg:w-1/2 xs:max-w-lg w-full mx-auto justify-items-center`}
     >
       {Array.from({ length: rowCount * colCount }, (_, index) => (
-        <input
-          key={index}
-          value={gridValues[index]}
-          ref={(r) => (inputRefs.current[index] = r)}
-          type="text"
-          className={`${highlightedRoute.includes(`${indexToCoord(index, colCount)[0]}${indexToCoord(index, colCount)[1]}`) ? 'bg-lime-300 ' : ''}xs:w-14 xs:h-14 w-10 h-10 font-bold rounded-md text-center uppercase grid-input-field`}
-          onChange={handleInputChange(index)}
-          onKeyDown={handleInputKey(index)}
-        ></input>
+        <div key={index} className="relative">
+          <input
+            value={gridValues[index]}
+            ref={(r) => (inputRefs.current[index] = r)}
+            type="text"
+            className={`${highlightedRoute.includes(`${indexToCoord(index, colCount)[0]}${indexToCoord(index, colCount)[1]}`) ? 'bg-lime-300 ' : ''}xs:w-14 xs:h-14 w-10 h-10 font-bold rounded-md text-center uppercase grid-input-field`}
+            onChange={handleInputChange(index)}
+            onKeyDown={handleInputKey(index)}
+          ></input>
+          {highlightedRoute.includes(
+            `${indexToCoord(index, colCount)[0]}${indexToCoord(index, colCount)[1]}`
+          ) && (
+            <div
+              className="absolute top-0 right-0 bg-black rounded-bl-full text-white font-medium text-sm p-1"
+              // style={{
+              //   position: 'absolute',
+              //   top: '0',
+              //   right: '0',
+              //   backgroundColor: 'white',
+              //   borderRadius: '50%',
+              //   padding: '2px 6px',
+              //   fontSize: '10px',
+              // }}
+            >
+              {highlightedRoute.findIndex(
+                (item) =>
+                  item ===
+                  `${indexToCoord(index, colCount)[0]}${indexToCoord(index, colCount)[1]}`
+              )}
+            </div>
+          )}
+        </div>
       ))}
     </div>
   )

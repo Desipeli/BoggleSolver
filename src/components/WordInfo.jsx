@@ -8,8 +8,8 @@ const WordInfo = ({ word, routes, setHighlightedRoute }) => {
   }
 
   return (
-    <div>
-      <span className="cursor-pointer" onClick={handleWordClick}>
+    <div className={`${show ? 'my-4 ' : ''} text-center`}>
+      <span className="cursor-pointer text-center" onClick={handleWordClick}>
         {word}
       </span>
       {show &&
