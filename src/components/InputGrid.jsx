@@ -56,6 +56,9 @@ const InputGrid = ({
       ) {
         inputRefs.current[index + 1].focus()
       }
+      if (index === rowCount * colCount - 1) {
+        document.getElementById('search-words-btn').focus()
+      }
     }
   }
 

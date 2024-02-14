@@ -55,6 +55,7 @@ const WordList = ({
           </p>
           <button
             name="search-words-btn"
+            id="search-words-btn"
             className="border rounded-lg min-h-12 w-80 bg-slate-100"
             onClick={handleSearch}
           >
