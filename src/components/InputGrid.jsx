@@ -1,6 +1,6 @@
 import * as React from 'react'
 
-const InputGrid = ({ rowCount, colCount }) => {
+const InputGrid = ({ rowCount, colCount, gridValues, setGridValues }) => {
   const gridContainerRef = React.useRef(null)
   const inputRefs = React.useRef([])
 
@@ -31,7 +31,9 @@ const InputGrid = ({ rowCount, colCount }) => {
 
   const handleInputChange = (index) => (event) => {
     const value = event.target.value
-
+    const newGrid = [...gridValues]
+    newGrid[index] = value.toLowerCase()
+    setGridValues(newGrid)
     if (value.length > 0) {
       if (index < inputRefs.current.length - 1) {
         inputRefs.current[index + 1].focus()

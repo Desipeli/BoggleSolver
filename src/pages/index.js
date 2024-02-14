@@ -16,6 +16,10 @@ const IndexPage = ({ data }) => {
 
   const [rowCount, setRowCount] = React.useState(5)
   const [colCount, setColCount] = React.useState(5)
+  const [gridValues, setGridValues] = React.useState(
+    Array.from({ length: rowCount * colCount }, () => '')
+  )
+
   const dictionary = dictJSON.words
 
   return (
@@ -35,10 +39,20 @@ const IndexPage = ({ data }) => {
             <p>Valitse kieli ja pelilaudan koko.</p>
             <p>Kirjaa pelilaudan nopissa näkyvät kirjaimet taulukkoon.</p>
           </div>
-          <InputGrid rowCount={rowCount} colCount={colCount} />
+          <InputGrid
+            rowCount={rowCount}
+            colCount={colCount}
+            gridValues={gridValues}
+            setGridValues={setGridValues}
+          />
         </section>
       </section>
-      <WordList dictionary={dictionary} />
+      <WordList
+        dictionary={dictionary}
+        gridValues={gridValues}
+        rowCount={rowCount}
+        colCount={colCount}
+      />
     </main>
   )
 }

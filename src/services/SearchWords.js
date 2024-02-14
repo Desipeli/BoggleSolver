@@ -129,14 +129,3 @@ module.exports = {
   binarySearchDict,
   dfs,
 }
-
-// for testing
-// const g = [
-//   ['A', 'I', 'T'],
-//   ['E', 'K', 'O'],
-//   ['I', 'A', 'Ä'],
-// ]
-
-// const d = ['AIKA', 'AITO', 'EIKÄ', 'EKA', 'KOTI', 'TIE', 'TOKA', 'TOKI']
-
-// console.log(SearchWords(g, d).sort((a, b) => a[0].localeCompare(b[0], 'fi')))
