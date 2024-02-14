@@ -57,7 +57,7 @@ const WordList = ({ dictionary, gridValues, rowCount, colCount }) => {
       </section>
       <section className="grid gap-2 grid-cols-1 md:grid-cols-3 xs:grid-cols-2 justify-items-center text-2xl text-slate-100 my-4">
         {Object.keys(wordRoutes)
-          .toSorted((a, b) => b.length - a.length || a.localeCompare(b, 'fi'))
+          .sort((a, b) => b.length - a.length || a.localeCompare(b, 'fi'))
           .map((word, i) => (
             <WordInfo key={i} word={word} routes={wordRoutes[word]} />
           ))}
