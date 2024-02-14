@@ -7,6 +7,7 @@ const WordList = ({ dictionary, gridValues, rowCount, colCount }) => {
   const [findError, setFindError] = React.useState('')
 
   const handleSearch = () => {
+    console.log(gridValues)
     for (let i = 0; i < gridValues.length; i++) {
       if (gridValues[i].length === 0) {
         setFindError('Täytä taulukko')

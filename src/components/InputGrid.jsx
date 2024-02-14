@@ -35,11 +35,16 @@ const InputGrid = ({ rowCount, colCount, gridValues, setGridValues }) => {
     newGrid[index] = value.toLowerCase()
     setGridValues(newGrid)
     if (value.length > 0) {
-      if (index < inputRefs.current.length - 1) {
+      if (
+        index < inputRefs.current.length - 1 &&
+        inputRefs.current[index + 1] !== null
+      ) {
         inputRefs.current[index + 1].focus()
       }
     }
   }
+
+  //console.log('inputsduh', inputRefs)
 
   return (
     <div
@@ -51,6 +56,7 @@ const InputGrid = ({ rowCount, colCount, gridValues, setGridValues }) => {
       {Array.from({ length: rowCount * colCount }, (_, index) => (
         <input
           key={index}
+          value={gridValues[index]}
           ref={(r) => (inputRefs.current[index] = r)}
           type="text"
           className="xs:w-14 xs:h-14 w-10 h-10 font-bold rounded-md text-center uppercase grid-input-field"

@@ -1,9 +1,10 @@
 import * as React from 'react'
 
-const Settings = ({ rowCount, colCount, setRowCount, setColCount }) => {
+const Settings = ({ setRowCount, setColCount, setGridValues }) => {
   const handleSelect = (value) => {
     setColCount(value)
     setRowCount(value)
+    setGridValues(Array.from({ length: value * value }, () => ''))
   }
 
   return (

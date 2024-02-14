@@ -30,10 +30,9 @@ const IndexPage = ({ data }) => {
             Boggle Ratkaisin
           </h1>
           <Settings
-            colCount={colCount}
-            rowCount={rowCount}
             setColCount={setColCount}
             setRowCount={setRowCount}
+            setGridValues={setGridValues}
           />
           <section className="block lg:flex justify-between my-12">
             <div className="lg:w-1/2 w-full text-xl px-4 lg:my-0 my-12 text-slate-100">
