@@ -86,23 +86,12 @@ const InputGrid = ({
           {highlightedRoute.includes(
             `${indexToCoord(index, colCount)[0]}${indexToCoord(index, colCount)[1]}`
           ) && (
-            <div
-              className="absolute top-0 right-0 bg-black rounded-bl-full text-white font-medium text-sm p-1"
-              // style={{
-              //   position: 'absolute',
-              //   top: '0',
-              //   right: '0',
-              //   backgroundColor: 'white',
-              //   borderRadius: '50%',
-              //   padding: '2px 6px',
-              //   fontSize: '10px',
-              // }}
-            >
+            <div className="absolute top-0 right-0 bg-black rounded-bl-full text-white font-medium text-sm p-1">
               {highlightedRoute.findIndex(
                 (item) =>
                   item ===
                   `${indexToCoord(index, colCount)[0]}${indexToCoord(index, colCount)[1]}`
-              )}
+              ) + 1}
             </div>
           )}
         </div>
