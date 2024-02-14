@@ -27,6 +27,14 @@ const InputGrid = ({ rowCount, colCount, gridValues, setGridValues }) => {
         prevInput.selectionEnd = prevInput.value.length
       }
     }
+    if (['Delete'].includes(event.key) && index < rowCount * colCount - 1) {
+      if (inputRefs.current[index].value.length === 0) {
+        const nextInput = inputRefs.current[index + 1]
+        nextInput.focus()
+        nextInput.selectionStart = 0
+        nextInput.selectionEnd = 0
+      }
+    }
   }
 
   const handleInputChange = (index) => (event) => {
