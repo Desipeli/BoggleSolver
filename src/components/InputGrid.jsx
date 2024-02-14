@@ -1,6 +1,13 @@
 import * as React from 'react'
+const { indexToCoord } = require('../services/ArrayGraph')
 
-const InputGrid = ({ rowCount, colCount, gridValues, setGridValues }) => {
+const InputGrid = ({
+  rowCount,
+  colCount,
+  gridValues,
+  setGridValues,
+  highlightedRoute,
+}) => {
   const gridContainerRef = React.useRef(null)
   const inputRefs = React.useRef([])
 
@@ -52,14 +59,19 @@ const InputGrid = ({ rowCount, colCount, gridValues, setGridValues }) => {
     }
   }
 
-  //console.log('inputsduh', inputRefs)
+  React.useEffect(() => {
+    if (highlightedRoute.length === 0) return
+    for (let i = 0; i < highlightedRoute.length; i++) {}
+  }, [highlightedRoute])
+
+  console.log('inputsduh', highlightedRoute)
 
   return (
     <div
       ref={gridContainerRef}
       id="grid-container"
       name="grid-container"
-      className={`grid gap-5 lg:w-1/2 max-w-56 xs:max-w-lg w-full mx-auto justify-items-center`}
+      className={`grid gap-5 lg:w-1/2 xs:max-w-lg w-full mx-auto justify-items-center`}
     >
       {Array.from({ length: rowCount * colCount }, (_, index) => (
         <input
@@ -67,7 +79,7 @@ const InputGrid = ({ rowCount, colCount, gridValues, setGridValues }) => {
           value={gridValues[index]}
           ref={(r) => (inputRefs.current[index] = r)}
           type="text"
-          className="xs:w-14 xs:h-14 w-10 h-10 font-bold rounded-md text-center uppercase grid-input-field"
+          className={`${highlightedRoute.includes(`${indexToCoord(index, colCount)[0]}${indexToCoord(index, colCount)[1]}`) ? 'bg-lime-300 ' : ''}xs:w-14 xs:h-14 w-10 h-10 font-bold rounded-md text-center uppercase grid-input-field`}
           onChange={handleInputChange(index)}
           onKeyDown={handleInputKey(index)}
         ></input>

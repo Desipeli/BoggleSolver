@@ -19,6 +19,7 @@ const IndexPage = ({ data }) => {
   const [gridValues, setGridValues] = React.useState(
     Array.from({ length: rowCount * colCount }, () => '')
   )
+  const [highlightedRoute, setHighlightedRoute] = React.useState([])
 
   const dictionary = dictJSON.words
 
@@ -44,6 +45,7 @@ const IndexPage = ({ data }) => {
               colCount={colCount}
               gridValues={gridValues}
               setGridValues={setGridValues}
+              highlightedRoute={highlightedRoute}
             />
           </section>
         </section>
@@ -52,6 +54,7 @@ const IndexPage = ({ data }) => {
           gridValues={gridValues}
           rowCount={rowCount}
           colCount={colCount}
+          setHighlightedRoute={setHighlightedRoute}
         />
       </div>
     </main>

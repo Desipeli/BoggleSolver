@@ -3,7 +3,13 @@ import WordInfo from './WordInfo'
 const { searchWords } = require('../services/SearchWords')
 const { convertArrayTo2D } = require('../services/ArrayGraph')
 
-const WordList = ({ dictionary, gridValues, rowCount, colCount }) => {
+const WordList = ({
+  dictionary,
+  gridValues,
+  rowCount,
+  colCount,
+  setHighlightedRoute,
+}) => {
   const [wordRoutes, setWordRoutes] = React.useState({})
   const [findError, setFindError] = React.useState('')
 
@@ -11,6 +17,7 @@ const WordList = ({ dictionary, gridValues, rowCount, colCount }) => {
     for (let i = 0; i < gridValues.length; i++) {
       if (gridValues[i].length === 0) {
         setFindError('Täytä taulukko')
+        setWordRoutes({})
         return
       }
     }
@@ -59,7 +66,12 @@ const WordList = ({ dictionary, gridValues, rowCount, colCount }) => {
         {Object.keys(wordRoutes)
           .sort((a, b) => b.length - a.length || a.localeCompare(b, 'fi'))
           .map((word, i) => (
-            <WordInfo key={i} word={word} routes={wordRoutes[word]} />
+            <WordInfo
+              key={i}
+              word={word}
+              routes={wordRoutes[word]}
+              setHighlightedRoute={setHighlightedRoute}
+            />
           ))}
       </section>
     </>
