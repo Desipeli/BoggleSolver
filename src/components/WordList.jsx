@@ -1,13 +1,13 @@
 import * as React from 'react'
+import WordInfo from './WordInfo'
 const { searchWords } = require('../services/SearchWords')
 const { convertArrayTo2D } = require('../services/ArrayGraph')
 
 const WordList = ({ dictionary, gridValues, rowCount, colCount }) => {
-  const [foundWords, setFoundWords] = React.useState([])
+  const [wordRoutes, setWordRoutes] = React.useState({})
   const [findError, setFindError] = React.useState('')
 
   const handleSearch = () => {
-    console.log(gridValues)
     for (let i = 0; i < gridValues.length; i++) {
       if (gridValues[i].length === 0) {
         setFindError('Täytä taulukko')
@@ -28,7 +28,15 @@ const WordList = ({ dictionary, gridValues, rowCount, colCount }) => {
     const sortedByLength = words.sort(
       (a, b) => b[0].length - a[0].length || a[0].localeCompare(b[0], 'fi')
     )
-    setFoundWords(sortedByLength)
+    const newWordRoutes = {}
+    for (let i = 0; i < sortedByLength.length; i++) {
+      if (!(sortedByLength[i][0] in newWordRoutes)) {
+        newWordRoutes[sortedByLength[i][0]] = [sortedByLength[i].splice(1)]
+      } else {
+        newWordRoutes[sortedByLength[i][0]].push(sortedByLength[i].splice(1))
+      }
+    }
+    setWordRoutes(newWordRoutes)
   }
 
   return (
@@ -47,10 +55,12 @@ const WordList = ({ dictionary, gridValues, rowCount, colCount }) => {
           </button>
         </div>
       </section>
-      <section className="grid gap-2 grid-cols-1 xs:grid-cols-2 justify-items-center text-2xl text-slate-100 my-4">
-        {foundWords.map((v, i) => (
-          <p key={i}>{v[0]}</p>
-        ))}
+      <section className="grid gap-2 grid-cols-1 md:grid-cols-3 xs:grid-cols-2 justify-items-center text-2xl text-slate-100 my-4">
+        {Object.keys(wordRoutes)
+          .toSorted((a, b) => b.length - a.length || a.localeCompare(b, 'fi'))
+          .map((word, i) => (
+            <WordInfo key={i} word={word} routes={wordRoutes[word]} />
+          ))}
       </section>
     </>
   )

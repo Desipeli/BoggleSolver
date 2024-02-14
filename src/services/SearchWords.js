@@ -4,13 +4,10 @@
  * @param {Array} dictionary list of words
  */
 const searchWords = (graph, dictionary) => {
-  let found = [] // [{"sana": [[1,3],[2,3],...]}]
+  let found = []
   for (let row = 0; row < graph.length; row++) {
     for (let col = 0; col < graph[0].length; col++) {
-      console.log('Starting with ', row, col)
       const result = dfs(graph, row, col, [], [], dictionary)
-      console.log('result', result)
-      console.log()
       if (result.length > 0) {
         found = [...found, ...result]
       }
