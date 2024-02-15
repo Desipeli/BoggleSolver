@@ -6,9 +6,9 @@ require('dotenv').config({
  * @type {import('gatsby').GatsbyConfig}
  */
 module.exports = {
-  pathPrefix: '/BoggleSolver',
+  pathPrefix: '/',
   siteMetadata: {
-    siteUrl: `https://www.yourdomain.tld`,
+    siteUrl: process.env.GATSBY_BASE_URL,
   },
   plugins: [
     'gatsby-plugin-postcss',

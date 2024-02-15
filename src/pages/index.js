@@ -4,18 +4,12 @@ import '../styles/global.css'
 import InputGrid from '../components/InputGrid'
 import Settings from '../components/Settings'
 import WordList from '../components/WordList'
-// import { graphql } from 'gatsby'
+import { graphql } from 'gatsby'
 
-import dictJSON from '../data/dictionaries/fin-kotus-basic.json'
+// import dictJSON from '../data/dictionaries/Suomi-kotus.json'
 
 const IndexPage = ({ data }) => {
-  // console.log(process.env.GATSBY_BASE_URL)
-  // const wordListURL =
-  //   process.env.GATSBY_BASE_URL +
-  //   data.allFile.nodes.map((node) => node.publicURL)
-
-  // console.log(wordListURL)
-  // console.log(data.allFile.nodes)
+  const baseURL = process.env.GATSBY_BASE_URL
 
   const [rowCount, setRowCount] = React.useState(4)
   const [colCount, setColCount] = React.useState(4)
@@ -24,13 +18,27 @@ const IndexPage = ({ data }) => {
     Array.from({ length: rowCount * colCount }, () => '')
   )
   const [highlightedRoute, setHighlightedRoute] = React.useState([])
-  const dictionary = dictJSON.words
+
+  const [dictionary, setDictionary] = React.useState([])
+  const [listOfDicts, setListOfDicts] = React.useState(data.allFile.nodes)
+  const [dictionaryNameURL, setDictionaryNameURL] = React.useState(
+    listOfDicts[0]
+  )
 
   const changeGridSize = (value) => {
     setGridSize(value)
     setGridValues(Array.from({ length: value * value }, () => ''))
     setHighlightedRoute([])
   }
+
+  React.useEffect(() => {
+    if (!dictionaryNameURL) return
+    fetch(`${dictionaryNameURL.publicURL}`)
+      .then((res) => res.json())
+      .then((data) => {
+        setDictionary(data.words)
+      })
+  }, [dictionaryNameURL])
 
   return (
     <main className="max-w-4xl mx-auto">
@@ -70,21 +78,22 @@ const IndexPage = ({ data }) => {
   )
 }
 
-// export const query = graphql`
-//   query {
-//     allFile(
-//       filter: {
-//         relativeDirectory: { eq: "dictionaries" }
-//         extension: { eq: "json" }
-//       }
-//     ) {
-//       nodes {
-//         base
-//         publicURL
-//       }
-//     }
-//   }
-// `
+export const query = graphql`
+  query {
+    allFile(
+      filter: {
+        relativeDirectory: { eq: "dictionaries" }
+        extension: { eq: "json" }
+      }
+      sort: { fields: name, order: ASC }
+    ) {
+      nodes {
+        name
+        publicURL
+      }
+    }
+  }
+`
 
 export default IndexPage
 
