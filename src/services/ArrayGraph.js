@@ -1,9 +1,9 @@
-const convertArrayTo2D = (array, rowCount, colCount) => {
+const convertArrayTo2D = (array, gridSize) => {
   const graph = []
-  for (let rowI = 0; rowI < rowCount; rowI++) {
+  for (let rowI = 0; rowI < gridSize; rowI++) {
     const new_row = []
-    for (let colI = 0; colI < colCount; colI++) {
-      new_row.push(array[rowI * colCount + colI])
+    for (let colI = 0; colI < gridSize; colI++) {
+      new_row.push(array[rowI * gridSize + colI])
     }
     graph.push(new_row)
   }
@@ -11,18 +11,13 @@ const convertArrayTo2D = (array, rowCount, colCount) => {
   return graph
 }
 
-const coordToIndex = (rowIndex, colIndex, colCount) => {
-  return rowIndex * colCount + colIndex
-}
-
-const indexToCoord = (index, colCount) => {
-  const row = Math.floor(index / colCount)
-  const col = index % colCount
+const indexToCoord = (index, gridSize) => {
+  const row = Math.floor(index / gridSize)
+  const col = index % gridSize
   return [row, col]
 }
 
 module.exports = {
   convertArrayTo2D,
-  coordToIndex,
   indexToCoord,
 }

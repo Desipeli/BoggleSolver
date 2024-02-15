@@ -6,8 +6,7 @@ const { convertArrayTo2D } = require('../services/ArrayGraph')
 const WordList = ({
   dictionary,
   gridValues,
-  rowCount,
-  colCount,
+  gridSize,
   setHighlightedRoute,
 }) => {
   const [wordRoutes, setWordRoutes] = React.useState({})
@@ -24,7 +23,7 @@ const WordList = ({
 
     setFindError('')
 
-    const array2D = convertArrayTo2D(gridValues, rowCount, colCount)
+    const array2D = convertArrayTo2D(gridValues, gridSize)
     const result = searchWords(array2D, dictionary) // result = [word, coordinate, coordinate,...]
     if (result.length > 0) {
       organizeFoundWords(result)

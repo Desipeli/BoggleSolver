@@ -14,14 +14,20 @@ const IndexPage = ({ data }) => {
   //   process.env.GATSBY_BASE_URL +
   //   data.allFile.nodes.map((node) => node.publicURL)
 
-  const [rowCount, setRowCount] = React.useState(5)
-  const [colCount, setColCount] = React.useState(5)
+  const [rowCount, setRowCount] = React.useState(4)
+  const [colCount, setColCount] = React.useState(4)
+  const [gridSize, setGridSize] = React.useState(4)
   const [gridValues, setGridValues] = React.useState(
     Array.from({ length: rowCount * colCount }, () => '')
   )
   const [highlightedRoute, setHighlightedRoute] = React.useState([])
-
   const dictionary = dictJSON.words
+
+  const changeGridSize = (value) => {
+    setGridSize(value)
+    setGridValues(Array.from({ length: value * value }, () => ''))
+    setHighlightedRoute([])
+  }
 
   return (
     <main className="max-w-4xl mx-auto">
@@ -31,6 +37,7 @@ const IndexPage = ({ data }) => {
             Boggle Ratkaisin
           </h1>
           <Settings
+            changeGridSize={changeGridSize}
             setColCount={setColCount}
             setRowCount={setRowCount}
             setGridValues={setGridValues}
@@ -41,20 +48,19 @@ const IndexPage = ({ data }) => {
               <p>Kirjaa pelilaudan nopissa näkyvät kirjaimet taulukkoon.</p>
             </div>
             <InputGrid
-              rowCount={rowCount}
-              colCount={colCount}
               gridValues={gridValues}
               setGridValues={setGridValues}
               highlightedRoute={highlightedRoute}
+              setHighlightedRoute={setHighlightedRoute}
+              gridSize={gridSize}
             />
           </section>
         </section>
         <WordList
           dictionary={dictionary}
           gridValues={gridValues}
-          rowCount={rowCount}
-          colCount={colCount}
           setHighlightedRoute={setHighlightedRoute}
+          gridSize={gridSize}
         />
       </div>
     </main>
