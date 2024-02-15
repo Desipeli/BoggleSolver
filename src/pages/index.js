@@ -6,13 +6,16 @@ import Settings from '../components/Settings'
 import WordList from '../components/WordList'
 // import { graphql } from 'gatsby'
 
-import dictJSON from '../data/sanalista.json'
+import dictJSON from '../data/dictionaries/fin-kotus-basic.json'
 
 const IndexPage = ({ data }) => {
   // console.log(process.env.GATSBY_BASE_URL)
   // const wordListURL =
   //   process.env.GATSBY_BASE_URL +
   //   data.allFile.nodes.map((node) => node.publicURL)
+
+  // console.log(wordListURL)
+  // console.log(data.allFile.nodes)
 
   const [rowCount, setRowCount] = React.useState(4)
   const [colCount, setColCount] = React.useState(4)
@@ -68,8 +71,13 @@ const IndexPage = ({ data }) => {
 }
 
 // export const query = graphql`
-//   query MyQuery {
-//     allFile(filter: { name: { eq: "sanalista" }, extension: { eq: "json" } }) {
+//   query {
+//     allFile(
+//       filter: {
+//         relativeDirectory: { eq: "dictionaries" }
+//         extension: { eq: "json" }
+//       }
+//     ) {
 //       nodes {
 //         base
 //         publicURL
