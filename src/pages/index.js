@@ -10,6 +10,7 @@ import { graphql } from 'gatsby'
 
 const IndexPage = ({ data }) => {
   const baseURL = process.env.GATSBY_BASE_URL
+  console.log(process.env.GATSBY_BASE_URL)
 
   const [rowCount, setRowCount] = React.useState(4)
   const [colCount, setColCount] = React.useState(4)
