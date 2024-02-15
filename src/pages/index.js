@@ -9,6 +9,10 @@ import { graphql } from 'gatsby'
 // import dictJSON from '../data/dictionaries/Suomi-kotus.json'
 
 const IndexPage = ({ data }) => {
+  let baseURL = ''
+  if (process.env.NODE_ENV === 'production') {
+    baseURL = process.env.GATSBY_BASE_URL
+  }
   const [rowCount, setRowCount] = React.useState(4)
   const [colCount, setColCount] = React.useState(4)
   const [gridSize, setGridSize] = React.useState(4)
@@ -31,7 +35,7 @@ const IndexPage = ({ data }) => {
 
   React.useEffect(() => {
     if (!dictionaryNameURL) return
-    fetch(`${dictionaryNameURL.publicURL}`)
+    fetch(`${baseURL}${dictionaryNameURL.publicURL}`)
       .then((res) => res.json())
       .then((data) => {
         setDictionary(data.words)
