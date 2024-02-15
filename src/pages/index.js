@@ -9,9 +9,6 @@ import { graphql } from 'gatsby'
 // import dictJSON from '../data/dictionaries/Suomi-kotus.json'
 
 const IndexPage = ({ data }) => {
-  const baseURL = process.env.GATSBY_BASE_URL
-  console.log(process.env.GATSBY_BASE_URL)
-
   const [rowCount, setRowCount] = React.useState(4)
   const [colCount, setColCount] = React.useState(4)
   const [gridSize, setGridSize] = React.useState(4)
@@ -21,7 +18,7 @@ const IndexPage = ({ data }) => {
   const [highlightedRoute, setHighlightedRoute] = React.useState([])
 
   const [dictionary, setDictionary] = React.useState([])
-  const [listOfDicts, setListOfDicts] = React.useState(data.allFile.nodes)
+  const listOfDicts = data.allFile.nodes
   const [dictionaryNameURL, setDictionaryNameURL] = React.useState(
     listOfDicts[0]
   )
@@ -48,12 +45,7 @@ const IndexPage = ({ data }) => {
           <h1 className="text-center text-5xl my-12 text-slate-100 text-decoration: underline">
             Boggle Ratkaisin
           </h1>
-          <Settings
-            changeGridSize={changeGridSize}
-            setColCount={setColCount}
-            setRowCount={setRowCount}
-            setGridValues={setGridValues}
-          />
+          <Settings changeGridSize={changeGridSize} listOfDicts={listOfDicts} />
           <section className="block lg:flex justify-between my-12">
             <div className="lg:w-1/2 w-full text-xl px-4 lg:my-0 my-12 text-slate-100">
               <p>Valitse kieli ja pelilaudan koko.</p>
@@ -86,7 +78,7 @@ export const query = graphql`
         relativeDirectory: { eq: "dictionaries" }
         extension: { eq: "json" }
       }
-      sort: { fields: name, order: ASC }
+      sort: { name: ASC }
     ) {
       nodes {
         name
