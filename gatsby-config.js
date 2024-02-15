@@ -6,7 +6,7 @@ require('dotenv').config({
  * @type {import('gatsby').GatsbyConfig}
  */
 module.exports = {
-  pathPrefix: '/',
+  pathPrefix: '/BoggleSolver',
   siteMetadata: {
     siteUrl: process.env.GATSBY_BASE_URL,
   },
