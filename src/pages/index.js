@@ -4,6 +4,9 @@ import '../styles/global.css'
 import InputGrid from '../components/InputGrid'
 import Settings from '../components/Settings'
 import WordList from '../components/WordList'
+
+import { useLocalStorage } from '../hooks/useLocalStorage'
+
 import { graphql } from 'gatsby'
 
 // import dictJSON from '../data/dictionaries/Suomi-kotus.json'
@@ -13,7 +16,8 @@ const IndexPage = ({ data }) => {
   if (process.env.NODE_ENV === 'production') {
     baseURL = process.env.GATSBY_BASE_URL
   }
-  const [gridSize, setGridSize] = React.useState(4)
+  //const [gridSize, setGridSize] = React.useState(4)
+  const [gridSize, setGridSize] = useLocalStorage('gridSize', 4)
   const [gridValues, setGridValues] = React.useState(
     Array.from({ length: gridSize ** 2 }, () => '')
   )
@@ -21,10 +25,13 @@ const IndexPage = ({ data }) => {
 
   const [dictionary, setDictionary] = React.useState([])
   const listOfDicts = data.allFile.nodes
-  const [dictionaryNameURL, setDictionaryNameURL] = React.useState(
+  // const [dictionaryNameURL, setDictionaryNameURL] = React.useState(
+  //   listOfDicts[0]
+  // )
+  const [dictionaryNameURL, setDictionaryNameURL] = useLocalStorage(
+    'currentDictionary',
     listOfDicts[0]
   )
-
   const changeGridSize = (value) => {
     setGridSize(value)
     setGridValues(Array.from({ length: value * value }, () => ''))
@@ -55,6 +62,8 @@ const IndexPage = ({ data }) => {
             changeGridSize={changeGridSize}
             listOfDicts={listOfDicts}
             setDictionaryNameURL={setDictionaryNameURL}
+            gridSize={gridSize}
+            dictionaryNameURL={dictionaryNameURL}
           />
           <section className="block lg:flex justify-between my-12">
             <div className="lg:w-1/2 w-full text-xl px-4 lg:my-0 my-12 text-slate-100">

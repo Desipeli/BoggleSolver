@@ -1,12 +1,19 @@
 import * as React from 'react'
 
-const Settings = ({ changeGridSize, listOfDicts, setDictionaryNameURL }) => {
+const Settings = ({
+  changeGridSize,
+  listOfDicts,
+  setDictionaryNameURL,
+  dictionaryNameURL,
+  gridSize,
+}) => {
   return (
     <section className="flex justify-between">
       <select
         name="dictionary-select"
         id="dictionary-select"
         onChange={(e) => setDictionaryNameURL(JSON.parse(e.target.value))}
+        defaultValue={JSON.stringify(dictionaryNameURL)}
         className="w-5/12 border border-gray-300 rounded-lg bg-slate-100 focus:border-green-500 text-xl  min-h-12 hover:shadow-green-500 shadow-md"
       >
         {listOfDicts?.map((v) => (
@@ -18,7 +25,7 @@ const Settings = ({ changeGridSize, listOfDicts, setDictionaryNameURL }) => {
       <select
         name="grid-size-select"
         id="grid-size-select"
-        defaultValue={4}
+        defaultValue={gridSize}
         className="w-5/12 border border-gray-300 rounded-lg bg-slate-100 focus:border-green-500 text-xl  min-h-12 hover:shadow-green-500 shadow-md"
         onChange={(e) => changeGridSize(e.target.value)}
       >
