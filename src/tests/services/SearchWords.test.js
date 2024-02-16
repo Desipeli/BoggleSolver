@@ -6,7 +6,10 @@ const g = [
   ['I', 'A', 'Ä'],
 ]
 
-const d = ['AIKA', 'ALKU', 'AITO', 'EIKÄ', 'EKA', 'MAITO']
+const d = {
+  words: ['AIKA', 'ALKU', 'AITO', 'EIKÄ', 'EKA', 'MAITO'],
+  language: 'fi',
+}
 
 test('find words and routes', () => {
   const result = searchWords(g, d)

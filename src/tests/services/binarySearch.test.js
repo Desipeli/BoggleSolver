@@ -1,7 +1,13 @@
 const { binarySearchDict } = require('../../services/SearchWords')
 
-const dictionaryEven = ['AIKA', 'AITO', 'EIKÄ', 'EKA']
-const dictionaryUneven = ['AIKA', 'AITO', 'EIKÄ', 'EKA', 'TOKA']
+const dictionaryEven = {
+  words: ['AIKA', 'AITO', 'EIKÄ', 'EKA'],
+  language: 'fi',
+}
+const dictionaryUneven = {
+  words: ['AIKA', 'AITO', 'EIKÄ', 'EKA', 'TOKA'],
+  language: 'fi',
+}
 
 describe('use dictionary with even number of elements', () => {
   for (let i = 0; i < dictionaryEven.length; i++) {

@@ -36,7 +36,7 @@ const IndexPage = ({ data }) => {
     fetch(`${baseURL}${dictionaryNameURL.publicURL}`)
       .then((res) => res.json())
       .then((data) => {
-        setDictionary(data.words)
+        setDictionary(data)
       })
   }
 

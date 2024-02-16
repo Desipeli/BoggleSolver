@@ -89,8 +89,9 @@ const dfs = (graph, rowI, colI, visitedC, visitedL, dictionary) => {
 }
 
 const binarySearchDict = (word, dictionary) => {
+  const wordList = dictionary.words
   let start = 0
-  let end = dictionary.length
+  let end = wordList.length
   let beginsWith = false
 
   while (true) {
@@ -98,14 +99,17 @@ const binarySearchDict = (word, dictionary) => {
     const middlepoint = start + Math.floor((end - start) / 2)
     // console.log(start, middlepoint, end, dictionary[middlepoint])
 
-    const comparison = word.localeCompare(dictionary[middlepoint], 'fi')
+    const comparison = word.localeCompare(
+      wordList[middlepoint],
+      dictionary.language
+    )
     if (comparison === 0) {
       return [true, middlepoint]
     }
     if (
       middlepoint >= 0 &&
-      middlepoint <= dictionary.length - 1 &&
-      dictionary[middlepoint].startsWith(word)
+      middlepoint <= wordList.length - 1 &&
+      wordList[middlepoint].startsWith(word)
     ) {
       beginsWith = true // word can be found later
     }
