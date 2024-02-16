@@ -13,11 +13,9 @@ const IndexPage = ({ data }) => {
   if (process.env.NODE_ENV === 'production') {
     baseURL = process.env.GATSBY_BASE_URL
   }
-  const [rowCount, setRowCount] = React.useState(4)
-  const [colCount, setColCount] = React.useState(4)
   const [gridSize, setGridSize] = React.useState(4)
   const [gridValues, setGridValues] = React.useState(
-    Array.from({ length: rowCount * colCount }, () => '')
+    Array.from({ length: gridSize ** 2 }, () => '')
   )
   const [highlightedRoute, setHighlightedRoute] = React.useState([])
 
@@ -33,13 +31,17 @@ const IndexPage = ({ data }) => {
     setHighlightedRoute([])
   }
 
-  React.useEffect(() => {
+  const loadDictionary = () => {
     if (!dictionaryNameURL) return
     fetch(`${baseURL}${dictionaryNameURL.publicURL}`)
       .then((res) => res.json())
       .then((data) => {
         setDictionary(data.words)
       })
+  }
+
+  React.useEffect(() => {
+    loadDictionary()
   }, [dictionaryNameURL])
 
   return (
@@ -49,7 +51,11 @@ const IndexPage = ({ data }) => {
           <h1 className="text-center text-5xl my-12 text-slate-100 text-decoration: underline">
             Boggle Ratkaisin
           </h1>
-          <Settings changeGridSize={changeGridSize} listOfDicts={listOfDicts} />
+          <Settings
+            changeGridSize={changeGridSize}
+            listOfDicts={listOfDicts}
+            setDictionaryNameURL={setDictionaryNameURL}
+          />
           <section className="block lg:flex justify-between my-12">
             <div className="lg:w-1/2 w-full text-xl px-4 lg:my-0 my-12 text-slate-100">
               <p>Valitse kieli ja pelilaudan koko.</p>
