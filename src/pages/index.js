@@ -21,7 +21,7 @@ const IndexPage = ({ data }) => {
   const [gridValues, setGridValues] = React.useState(
     Array.from({ length: gridSize ** 2 }, () => '')
   )
-  const [highlightedRoutes, setHighlightedRoutes] = React.useState([])
+  const [selectedWord, setSelectedWord] = React.useState(null)
   const [dictionary, setDictionary] = React.useState([])
   const listOfDicts = data.allFile.nodes
   const [dictionaryNameURL, setDictionaryNameURL] = useLocalStorage(
@@ -32,7 +32,7 @@ const IndexPage = ({ data }) => {
   const changeGridSize = (value) => {
     setGridSize(value)
     setGridValues(Array.from({ length: value * value }, () => ''))
-    setHighlightedRoutes([])
+    setSelectedWord(null)
   }
 
   const loadDictionary = () => {
@@ -64,14 +64,14 @@ const IndexPage = ({ data }) => {
           />
           <section className="block lg:flex justify-between my-12">
             <div className="lg:w-1/2 w-full text-xl px-4 lg:my-0 my-12 text-slate-100">
-              <p>Valitse kieli ja pelilaudan koko.</p>
+              <p>Valitse sanakirja ja pelilaudan koko.</p>
               <p>Kirjaa pelilaudan nopissa näkyvät kirjaimet taulukkoon.</p>
             </div>
             <InputGrid
               gridValues={gridValues}
               setGridValues={setGridValues}
-              highlightedRoutes={highlightedRoutes}
-              setHighlightedRoutes={setHighlightedRoutes}
+              selectedWord={selectedWord}
+              setSelectedWord={setSelectedWord}
               gridSize={gridSize}
             />
           </section>
@@ -79,7 +79,7 @@ const IndexPage = ({ data }) => {
         <WordList
           dictionary={dictionary}
           gridValues={gridValues}
-          setHighlightedRoutes={setHighlightedRoutes}
+          setSelectedWord={setSelectedWord}
           gridSize={gridSize}
         />
       </div>

@@ -1,8 +1,8 @@
 import * as React from 'react'
 
-const WordInfo = ({ word, routes, setHighlightedRoutes }) => {
+const WordInfo = ({ word, routes, setSelectedWord }) => {
   const handleClick = () => {
-    setHighlightedRoutes(routes)
+    setSelectedWord({ word: word, routes: routes })
   }
 
   return (

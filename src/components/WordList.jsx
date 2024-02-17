@@ -3,12 +3,7 @@ import WordInfo from './WordInfo'
 const { searchWords } = require('../services/SearchWords')
 const { convertArrayTo2D } = require('../services/ArrayGraph')
 
-const WordList = ({
-  dictionary,
-  gridValues,
-  gridSize,
-  setHighlightedRoutes,
-}) => {
+const WordList = ({ dictionary, gridValues, gridSize, setSelectedWord }) => {
   const [wordRoutes, setWordRoutes] = React.useState({})
   const [findError, setFindError] = React.useState('')
 
@@ -73,7 +68,7 @@ const WordList = ({
               key={i}
               word={word}
               routes={wordRoutes[word]}
-              setHighlightedRoutes={setHighlightedRoutes}
+              setSelectedWord={setSelectedWord}
             />
           ))}
       </section>
