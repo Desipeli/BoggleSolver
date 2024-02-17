@@ -7,7 +7,7 @@ const WordList = ({
   dictionary,
   gridValues,
   gridSize,
-  setHighlightedRoute,
+  setHighlightedRoutes,
 }) => {
   const [wordRoutes, setWordRoutes] = React.useState({})
   const [findError, setFindError] = React.useState('')
@@ -73,7 +73,7 @@ const WordList = ({
               key={i}
               word={word}
               routes={wordRoutes[word]}
-              setHighlightedRoute={setHighlightedRoute}
+              setHighlightedRoutes={setHighlightedRoutes}
             />
           ))}
       </section>

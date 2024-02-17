@@ -5,8 +5,8 @@ const InputGrid = ({
   gridSize,
   gridValues,
   setGridValues,
-  highlightedRoute,
-  setHighlightedRoute,
+  highlightedRoutes,
+  setHighlightedRoutes,
 }) => {
   const gridContainerRef = React.useRef(null)
   const inputRefs = React.useRef([])
@@ -47,8 +47,8 @@ const InputGrid = ({
   const handleInputChange = (index) => (event) => {
     const value = event.target.value
     const coord = indexToCoord(index, gridSize)
-    if (highlightedRoute.includes(`${coord[0]}${coord[1]}`)) {
-      setHighlightedRoute([])
+    if (highlightedRoutes[0]?.includes(`${coord[0]}${coord[1]}`)) {
+      setHighlightedRoutes([])
     }
 
     const newGrid = [...gridValues]
@@ -68,9 +68,9 @@ const InputGrid = ({
   }
 
   React.useEffect(() => {
-    if (highlightedRoute.length === 0) return
-    for (let i = 0; i < highlightedRoute.length; i++) {}
-  }, [highlightedRoute])
+    if (highlightedRoutes[0]?.length === 0) return
+    for (let i = 0; i < highlightedRoutes[0]?.length; i++) {}
+  }, [highlightedRoutes])
 
   return (
     <div
@@ -81,7 +81,7 @@ const InputGrid = ({
     >
       {Array.from({ length: gridSize ** 2 }, (_, index) => {
         const coord = indexToCoord(index, gridSize)
-        const routeIndex = highlightedRoute.findIndex(
+        const routeIndex = highlightedRoutes[0]?.findIndex(
           (item) => item === `${coord[0]}${coord[1]}`
         )
         return (
@@ -90,11 +90,11 @@ const InputGrid = ({
               value={gridValues[index]}
               ref={(r) => (inputRefs.current[index] = r)}
               type="text"
-              className={`${highlightedRoute.includes(`${coord[0]}${coord[1]}`) ? (routeIndex === 0 ? 'bg-yellow-300 ' : 'bg-lime-300 ') : ''}xs:w-14 xs:h-14 w-10 h-10 font-bold rounded-md text-center uppercase grid-input-field`}
+              className={`${highlightedRoutes[0]?.includes(`${coord[0]}${coord[1]}`) ? (routeIndex === 0 ? 'bg-yellow-300 ' : 'bg-lime-300 ') : ''}xs:w-14 xs:h-14 w-10 h-10 font-bold rounded-md text-center uppercase grid-input-field`}
               onChange={handleInputChange(index)}
               onKeyDown={handleInputKey(index)}
             ></input>
-            {highlightedRoute.includes(`${coord[0]}${coord[1]}`) && (
+            {highlightedRoutes[0]?.includes(`${coord[0]}${coord[1]}`) && (
               <div className="absolute top-0 right-0 bg-black rounded-bl-full text-white font-medium text-sm p-1">
                 {routeIndex + 1}
               </div>

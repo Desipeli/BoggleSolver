@@ -21,21 +21,18 @@ const IndexPage = ({ data }) => {
   const [gridValues, setGridValues] = React.useState(
     Array.from({ length: gridSize ** 2 }, () => '')
   )
-  const [highlightedRoute, setHighlightedRoute] = React.useState([])
-
+  const [highlightedRoutes, setHighlightedRoutes] = React.useState([])
   const [dictionary, setDictionary] = React.useState([])
   const listOfDicts = data.allFile.nodes
-  // const [dictionaryNameURL, setDictionaryNameURL] = React.useState(
-  //   listOfDicts[0]
-  // )
   const [dictionaryNameURL, setDictionaryNameURL] = useLocalStorage(
     'currentDictionary',
     listOfDicts[0]
   )
+
   const changeGridSize = (value) => {
     setGridSize(value)
     setGridValues(Array.from({ length: value * value }, () => ''))
-    setHighlightedRoute([])
+    setHighlightedRoutes([])
   }
 
   const loadDictionary = () => {
@@ -73,8 +70,8 @@ const IndexPage = ({ data }) => {
             <InputGrid
               gridValues={gridValues}
               setGridValues={setGridValues}
-              highlightedRoute={highlightedRoute}
-              setHighlightedRoute={setHighlightedRoute}
+              highlightedRoutes={highlightedRoutes}
+              setHighlightedRoutes={setHighlightedRoutes}
               gridSize={gridSize}
             />
           </section>
@@ -82,7 +79,7 @@ const IndexPage = ({ data }) => {
         <WordList
           dictionary={dictionary}
           gridValues={gridValues}
-          setHighlightedRoute={setHighlightedRoute}
+          setHighlightedRoutes={setHighlightedRoutes}
           gridSize={gridSize}
         />
       </div>
