@@ -79,29 +79,29 @@ const InputGrid = ({
       name="grid-container"
       className={`grid gap-5 lg:w-1/2 xs:max-w-lg w-full mx-auto justify-items-center`}
     >
-      {Array.from({ length: gridSize ** 2 }, (_, index) => (
-        <div key={index} className="relative">
-          <input
-            value={gridValues[index]}
-            ref={(r) => (inputRefs.current[index] = r)}
-            type="text"
-            className={`${highlightedRoute.includes(`${indexToCoord(index, gridSize)[0]}${indexToCoord(index, gridSize)[1]}`) ? 'bg-lime-300 ' : ''}xs:w-14 xs:h-14 w-10 h-10 font-bold rounded-md text-center uppercase grid-input-field`}
-            onChange={handleInputChange(index)}
-            onKeyDown={handleInputKey(index)}
-          ></input>
-          {highlightedRoute.includes(
-            `${indexToCoord(index, gridSize)[0]}${indexToCoord(index, gridSize)[1]}`
-          ) && (
-            <div className="absolute top-0 right-0 bg-black rounded-bl-full text-white font-medium text-sm p-1">
-              {highlightedRoute.findIndex(
-                (item) =>
-                  item ===
-                  `${indexToCoord(index, gridSize)[0]}${indexToCoord(index, gridSize)[1]}`
-              ) + 1}
-            </div>
-          )}
-        </div>
-      ))}
+      {Array.from({ length: gridSize ** 2 }, (_, index) => {
+        const coord = indexToCoord(index, gridSize)
+        const routeIndex = highlightedRoute.findIndex(
+          (item) => item === `${coord[0]}${coord[1]}`
+        )
+        return (
+          <div key={index} className="relative">
+            <input
+              value={gridValues[index]}
+              ref={(r) => (inputRefs.current[index] = r)}
+              type="text"
+              className={`${highlightedRoute.includes(`${coord[0]}${coord[1]}`) ? (routeIndex === 0 ? 'bg-yellow-300 ' : 'bg-lime-300 ') : ''}xs:w-14 xs:h-14 w-10 h-10 font-bold rounded-md text-center uppercase grid-input-field`}
+              onChange={handleInputChange(index)}
+              onKeyDown={handleInputKey(index)}
+            ></input>
+            {highlightedRoute.includes(`${coord[0]}${coord[1]}`) && (
+              <div className="absolute top-0 right-0 bg-black rounded-bl-full text-white font-medium text-sm p-1">
+                {routeIndex + 1}
+              </div>
+            )}
+          </div>
+        )
+      })}
     </div>
   )
 }
