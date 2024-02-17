@@ -24,7 +24,10 @@ const WordList = ({
     setFindError('')
 
     const array2D = convertArrayTo2D(gridValues, gridSize)
+    const startTime = performance.now()
     const result = searchWords(array2D, dictionary) // result = [word, coordinate, coordinate,...]
+    const endTime = performance.now()
+    console.log('search dureation:', endTime - startTime, 'milliseconds')
     if (result.length > 0) {
       organizeFoundWords(result)
     }
