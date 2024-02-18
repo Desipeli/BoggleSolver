@@ -7,12 +7,12 @@ const WordInfo = ({ word, routes, setSelectedWord, selectedWord }) => {
 
   return (
     <div className={`text-center`}>
-      <span
+      <button
         className={`${selectedWord && selectedWord.word === word ? 'border rounded-lg ' : ''}cursor-pointer text-center`}
         onClick={handleClick}
       >
         {word}
-      </span>
+      </button>
     </div>
   )
 }
