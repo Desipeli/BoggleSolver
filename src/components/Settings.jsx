@@ -13,7 +13,7 @@ const Settings = ({
         name="dictionary-select"
         id="dictionary-select"
         onChange={(e) => setDictionaryNameURL(JSON.parse(e.target.value))}
-        defaultValue={JSON.stringify(dictionaryNameURL)}
+        value={JSON.stringify(dictionaryNameURL)}
         className="w-5/12 border border-gray-300 rounded-lg bg-slate-100 focus:border-green-500 text-xl  min-h-12 hover:shadow-green-500 shadow-md"
       >
         {listOfDicts?.map((v) => (
