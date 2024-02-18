@@ -35,18 +35,18 @@ const IndexPage = ({ data }) => {
     setSelectedWord(null)
   }
 
-  const loadDictionary = () => {
-    if (!dictionaryNameURL) return
-    fetch(`${baseURL}${dictionaryNameURL.publicURL}`)
-      .then((res) => res.json())
-      .then((data) => {
-        setDictionary(data)
-      })
-  }
-
   React.useEffect(() => {
+    const loadDictionary = () => {
+      if (!dictionaryNameURL) return
+      fetch(`${baseURL}${dictionaryNameURL.publicURL}`)
+        .then((res) => res.json())
+        .then((data) => {
+          setDictionary(data)
+        })
+    }
+
     loadDictionary()
-  }, [dictionaryNameURL])
+  }, [dictionaryNameURL, baseURL])
 
   return (
     <main className="max-w-4xl mx-auto">
