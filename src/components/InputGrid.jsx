@@ -86,7 +86,7 @@ const InputGrid = ({
   React.useEffect(() => {
     if (selectedWord?.routes[routeId]?.length === 0) return
     for (let i = 0; i < selectedWord?.routes[routeId]?.length; i++) {}
-  }, [selectedWord])
+  }, [selectedWord, routeId])
 
   return (
     <div className="flex lg:w-1/2 w-full mx-auto" name="grid-and-buttons">
