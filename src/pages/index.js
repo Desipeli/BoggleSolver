@@ -81,6 +81,7 @@ const IndexPage = ({ data }) => {
           gridValues={gridValues}
           setSelectedWord={setSelectedWord}
           gridSize={gridSize}
+          selectedWord={selectedWord}
         />
       </div>
     </main>

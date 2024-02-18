@@ -30,10 +30,9 @@ const InputGrid = ({
   React.useEffect(() => {
     const gridContainer = gridContainerRef.current
 
-    const mediaQuery = window.matchMedia('(max-width: 400px)')
+    const mediaQuery = window.matchMedia('(max-width: 439px)')
 
     if (mediaQuery.matches) {
-      console.log('smol')
       gridContainer.style.gridTemplateColumns = `repeat(${gridSize}, minmax(0, 1fr))`
       gridContainer.style.width = `${gridSize * 2.5}rem`
     } else {
@@ -90,8 +89,8 @@ const InputGrid = ({
   }, [selectedWord])
 
   return (
-    <div className="flex  w-full mx-auto" name="grid-and-buttons">
-      <div className="sm:w-1/2 w-full mx-auto justify-items-center">
+    <div className="flex lg:w-1/2 w-full mx-auto" name="grid-and-buttons">
+      <div className=" w-full mx-auto justify-items-center">
         <div
           ref={gridContainerRef}
           id="grid-container"
@@ -132,7 +131,7 @@ const InputGrid = ({
             >
               &#8592;
             </button>
-            <span className="text-xl text-white">
+            <span className="text-xl text-white mx-2">
               {selectedWord.word} {routeId + 1}/{selectedWord?.routes.length}
             </span>
             <button
